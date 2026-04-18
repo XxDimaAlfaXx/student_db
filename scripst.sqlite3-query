@@ -1,0 +1,118 @@
+-- database: ./student.db
+
+CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(150) NOT NULL,
+    age INTEGER ,
+    major TEXT
+);
+
+
+
+CREATE TABLE IF NOT EXISTS courses (
+    course_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    course_name VARCHAR(150) NOT NULL,
+    instructor TEXT
+);
+
+
+
+CREATE TABLE IF NOT EXISTS students_courses(
+    student_id INTEGER REFERENCES students(id),
+    course_id INTEGER REFERENCES courses (course_id),
+    PRIMARY KEY (student_id, course_id)
+    
+);
+
+-- Дані для students
+INSERT INTO students (name, age, major) VALUES
+('Іван Петренко', 18, 'Computer Science'),
+('Марія Іваненко', 19, 'Mathematics'),
+('Олег Коваль', 20, 'Physics'),
+('Анна Шевченко', 18, 'Biology'),
+('Дмитро Бондар', 21, 'Economics');
+
+-- Дані для courses
+INSERT INTO courses (course_name, instructor) VALUES
+('Програмування на Python', 'Сергій Коваленко'),
+('Лінійна алгебра', 'Олена Мельник'),
+('Квантова фізика', 'Андрій Ткачук'),
+('Генетика', 'Ірина Савчук'),
+('Макроекономіка', 'Василь Гнатюк');
+
+
+-- Дані для enrollments (зв’язки студентів і курсів)
+INSERT INTO enrollments (student_id, course_id) VALUES
+(1, 1), -- Іван → Python
+(1, 2), -- Іван → Алгебра
+(2, 2), -- Марія → Алгебра
+(3, 3), -- Олег → Фізика
+(4, 4), -- Анна → Генетика
+(5, 5), -- Дмитро → Економіка
+(2, 1), -- Марія → Python
+(3, 2); -- Олег → Алгебра
+
+
+
+
+-- Додаткові студенти
+INSERT INTO students (name, age, major) VALUES
+('Назар Дорошенко', 19, 'Computer Science'),
+('Софія Левченко', 18, 'Design'),
+('Юрій Мартинюк', 22, 'Engineering'),
+('Катерина Романюк', 20, 'Law'),
+('Владислав Кравець', 21, 'Finance'),
+('Ірина Климчук', 19, 'Psychology'),
+('Богдан Стецюк', 23, 'History'),
+('Тетяна Федорук', 18, 'Philosophy'),
+('Роман Литвин', 20, 'Computer Science'),
+('Оксана Гриценко', 21, 'Biotechnology');
+
+-- Додаткові курси
+INSERT INTO courses (course_name, instructor) VALUES
+('Data Structures', 'Михайло Бойко'),
+('Web Development', 'Олег Руденко'),
+('Criminal Law', 'Наталія Коваль'),
+('Microeconomics', 'Петро Савченко'),
+('Philosophy of Mind', 'Юлія Мороз'),
+('Modern History', 'Ігор Дяченко'),
+('Software Engineering', 'Артем Сидоренко'),
+('UI/UX Design', 'Марина Бондар'),
+('Artificial Intelligence', 'Володимир Кравчук'),
+('Statistics', 'Людмила Гнатюк');
+
+
+-- Додаткові enrollments
+INSERT INTO enrollments (student_id, course_id) VALUES
+(6, 6),
+(6, 7),
+(7, 8),
+(7, 9),
+(8, 10),
+(8, 1),
+(9, 11),
+(9, 12),
+(10, 13),
+(10, 14),
+(11, 15),
+(11, 2),
+(12, 3),
+(12, 4),
+(13, 5),
+(13, 6),
+(14, 7),
+(14, 8),
+(15, 9),
+(15, 10),
+
+-- ще трохи міксу для реалістичності
+(1, 6),
+(2, 7),
+(3, 8),
+(4, 9),
+(5, 10),
+(6, 11),
+(7, 12),
+(8, 13),
+(9, 14),
+(10, 15);
